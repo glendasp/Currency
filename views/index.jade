@@ -6,10 +6,18 @@ block content
 
     form(action="/convert", method="get")
       div(class="currency_form")
-        span.label Amount in dollars
+        span.label Amount in;
         input(type="text", name="dollaramount")
-        select(name="tocurrency")
-          option(value="Euro") Euros
-          option(value="Pound") Pounds
+          select(name="fromcurrency")
+            option(value="Euro") Euros
+            option(value="Pound") Pounds
+            option(value="Dollar") Dollars
+
+
       div(class=button)
         input(type="submit", value="Convert")
+        span.label convert to;
+          select(name="tocurrency")
+            option(value="EUR") Euros
+            option(value="GBP") Pounds
+            option(value="USD") Dollars
