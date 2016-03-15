@@ -1,4 +1,4 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
 
 /* GET home page. */
@@ -10,7 +10,6 @@ function homepage(req, res) {
 
 /* GET request , for form submit */
 router.get('/convert', convert);
-
 function convert(req, res){
 
     //Data send as a post request is available in the
@@ -19,20 +18,18 @@ function convert(req, res){
     var money = req.query.fromamount;
     var convertFrom = req.query.fromcurrency;
     var convertTo = req.query.tocurrency;
-
     console.log("query was: convert " + money + " to " + convertTo);
-
+    
     //Our conversion rates - TODO what's wrong with this? It is only current for a specific day
-    var conversion = {"Pound": 1.6, "Euro": 1.1, "Dollars": 1.40};
-
+    var conversion = {"Pound": 1.6, "Euro": 2.32, "Dollars": 1.4};
+    var baseUSD = money / conversion[convertFrom];
     var conversionRate = conversion[convertTo];
-
-    var convertedVal = conversionRate * dollars;
+    var convertedVal = conversionRate * baseUSD;
 
     res.render('result', {
-        start: money,
+        startmoney: money,
+        start: convertFrom,
         currency:convertTo,
-        converted:convertedVal});
-}
-
+        converted:convertedVal.toFixed(2)});
+    }
 module.exports = router;
