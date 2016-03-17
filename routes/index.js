@@ -18,18 +18,24 @@ function convert(req, res){
     var money = req.query.fromamount;
     var convertFrom = req.query.fromcurrency;
     var convertTo = req.query.tocurrency;
+
     console.log("query was: convert " + money + " to " + convertTo);
+    console.log("ConvertFrom: "+convertFrom+" To: "+convertTo);
     
-    //Our conversion rates - TODO what's wrong with this? It is only current for a specific day
-    var conversion = {"Pound": 1.6, "Euro": 2.32, "Dollars": 1.4};
+    //Our conversion rates -
+    var conversion = {"GBP": 1, "EUR": 2, "USD": 1};
     var baseUSD = money / conversion[convertFrom];
+    console.log(baseUSD);
     var conversionRate = conversion[convertTo];
+    console.log(conversionRate);
     var convertedVal = conversionRate * baseUSD;
+    console.log(convertedVal);
 
     res.render('result', {
         startmoney: money,
-        start: convertFrom,
-        currency:convertTo,
-        converted:convertedVal.toFixed(2)});
+        startcurrency: convertFrom,
+        currency: convertTo,
+        converted: convertedVal.toFixed(2)});
     }
+
 module.exports = router;
